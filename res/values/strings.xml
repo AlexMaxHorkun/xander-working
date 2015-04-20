@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">coolstory</string>
+    <string name="greeting_image_description">Time for cool stories</string>
+    <string name="main_menu_title">This is main menu</string>
+</resources>
