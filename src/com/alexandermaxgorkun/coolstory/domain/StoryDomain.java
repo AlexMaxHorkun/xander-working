@@ -14,9 +14,26 @@ public class StoryDomain {
     }
 
     /**
-     * Searching for stories.
+     * (Remotely) searching for stories.
      */
     public Collection<Story> find(ORDER order, int limit) {
+        ArrayList<Story> stories = new ArrayList<Story>();
+        Story story = new Story("Remote Cool story");
+        stories.add(story);
+        story = new Story("Remote Some bullshit");
+        stories.add(story);
+
+        if (limit >= 0 && stories.size() > limit) {
+            stories = (ArrayList<Story>) stories.subList(0, limit - 1);
+        }
+        
+        return stories;
+    }
+
+    /**
+     * Find stories in local storage.
+     */
+    public Collection<Story> findLocal(ORDER order, int limit) {
         ArrayList<Story> stories = new ArrayList<Story>();
         Story story = new Story("Cool story");
         stories.add(story);

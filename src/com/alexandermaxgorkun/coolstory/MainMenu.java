@@ -1,6 +1,7 @@
 package com.alexandermaxgorkun.coolstory;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,14 @@ public class MainMenu extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_menu);
         storyDomain = new StoryDomain();
+        View createButton = (View) findViewById(R.id.create_story_button);
+        createButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent createForm = new Intent(MainMenu.this, CreateStoryForm.class);
+                startActivity(createForm);
+            }
+        });
     }
 
     public void onResume() {
@@ -71,24 +80,39 @@ public class MainMenu extends Activity {
     }
 
     private class Loading implements Runnable {
-        public void run() {
-            final Collection<Story> stories = storyDomain.find(StoryDomain.ORDER.CREATED_DESC, 5);
-            runOnUiThread(new Runnable() {
-                Collection<Story> storyList = stories;
+        private class ShowStories implements Runnable {
+            private final Collection<Story> stories;
+            private final boolean append;
 
-                @Override
-                public void run() {
-                    ViewGroup mainWidget = (ViewGroup) findViewById(R.id.main_menu_block);
-                    for (Story story : stories) {
-                        TextView storyWidget = new TextView(MainMenu.this);
-                        storyWidget.setText(story.getTitle() + story.getCreated());
-                        storyWidget.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-                        mainWidget.addView(storyWidget);
-                        storyWidget.setVisibility(View.VISIBLE);
-                    }
-                    storiesLoaded = true;
+            public ShowStories(Collection<Story> s, boolean append) {
+                stories = s;
+                this.append = append;
+            }
+
+            @Override
+            public void run() {
+                ViewGroup recentStoriesView = (ViewGroup) findViewById(R.id.recent_stories);
+                if (!append) {
+                    recentStoriesView.removeAllViews();
                 }
-            });
+                for (Story story : stories) {
+                    TextView storyWidget = new TextView(MainMenu.this);
+                    storyWidget.setText(story.getTitle() + story.getCreated());
+                    storyWidget.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                    recentStoriesView.addView(storyWidget);
+                    storyWidget.setVisibility(View.VISIBLE);
+                }
+                storiesLoaded = true;
+            }
+        }
+
+        public void run() {
+            Collection<Story> stories = storyDomain.findLocal(StoryDomain.ORDER.CREATED_DESC, 5);
+            if (stories.size() > 0) {
+                runOnUiThread(new ShowStories(stories, false));
+            }
+            stories = storyDomain.find(StoryDomain.ORDER.CREATED_DESC, 5);
+            runOnUiThread(new ShowStories(stories, false));
         }
     }
 }

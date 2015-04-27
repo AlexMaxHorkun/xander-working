@@ -3,4 +3,13 @@
     <string name="app_name">coolstory</string>
     <string name="greeting_image_description">Time for cool stories</string>
     <string name="main_menu_title">This is main menu</string>
+    <string name="create_story_button">Start a story</string>
+    <string name="create_story_form_title">Start a story</string>
+    <string name="create_story_form_fields_title_label">Title</string>
+    <string name="create_story_form_fields_title_hint">Enter new story\'s title</string>
+    <string name="create_story_form_fields_paragraph_hint">enter new story\'s first paragraph</string>
+    <string name="create_story_form_fields_paragraph_label">First paragraph</string>
+    <string name="create_story_form_submit_button">Start new story</string>
+    <string name="activity_title__mainmenu">Cool story bro</string>
+    <string name="activity_title__createstoryform">Start a story</string>
 </resources>
