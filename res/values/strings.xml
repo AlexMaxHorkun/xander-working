@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">coolstory</string>
+    <string name="ok_button">OK</string>
     <string name="greeting_image_description">Time for cool stories</string>
     <string name="main_menu_title">This is main menu</string>
     <string name="create_story_button">Start a story</string>
@@ -10,6 +11,9 @@
     <string name="create_story_form_fields_paragraph_hint">enter new story\'s first paragraph</string>
     <string name="create_story_form_fields_paragraph_label">First paragraph</string>
     <string name="create_story_form_submit_button">Start new story</string>
+    <string name="create_story_form_invalid_story">Form is not filled properly</string>
+    <string name="create_story_form_valid_story">Story is being created&#8230;</string>
+    <string name="create_story_form_story_created">Story created!!!</string>
     <string name="activity_title__mainmenu">Cool story bro</string>
     <string name="activity_title__createstoryform">Start a story</string>
 </resources>

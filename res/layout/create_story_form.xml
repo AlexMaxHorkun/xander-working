@@ -28,6 +28,7 @@
     <Button android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/create_story_form_submit_button"
+            android:id="@+id/submit_story_button"
             />
 
 </LinearLayout>
